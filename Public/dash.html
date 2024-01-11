@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dash | Make A Dash</title>
+    <link rel="stylesheet" href="../src/dash.css">
+</head>
+<body>
+    <h1>Make A Dash</h1>
+
+    <form action="#" class="dash__form">
+        <div class="dash__input-container">
+            <label for="dash-image" class="dash__image--label">
+                <input type="file" class="dash__image--input" name="dash-image" id="dash-image" accept="image/*" multiple>
+            </label>
+        </div>
+        
+        <div class="dash__input-container">
+            <label for="dash-name">Dash Name</label>
+            <input type="text" class="dash__name" name="dash-name" id="dash-name">
+        </div>
+
+        <div class="dash__input-container">
+            <label for="dash-category">Dash Category</label>
+            <input list="dash-list" type="text" class="dash__category" name="dash-category" id="dash-category">
+            <datalist id="dash-list">
+                <option value="Furniture"></option>
+                <option value="Clothing"></option>
+                <option value="Electronics"></option>
+            </datalist>
+        </div>
+
+
+        <button type="button" class="btn__submit--dash">Dash</button>
+    </form>
+
+    <script src="../src/test.js"></script>
+    <script src="../src/dash.js"></script>
+</body>
+</html>

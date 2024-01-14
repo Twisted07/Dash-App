@@ -26,10 +26,6 @@ btnDash.onclick = () => {
         newDash = new Dash(dashImage, dashName, dashCategory, new Date().toLocaleDateString(), Date.now());
 
         dashManager.updateUser('anonymous', newDash);
-        // console.log(store);
-        dashForm.submit();
-    
-        // ? Get the user's account and update the dash property
 
     }
 }

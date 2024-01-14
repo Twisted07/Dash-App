@@ -36,10 +36,6 @@ class StoreManager {
         this._data = this.loadStore()
     }
 
-    saveStore() {
-        localStorage.setItem('dash-app', JSON.stringify(this._data));
-    }
-
     updateStore(userData) {
         localStorage.setItem('dash-app', JSON.stringify([userData]))
     }
@@ -116,15 +112,16 @@ class DashManager {
         storeManager.store.map(currUser => {
             console.log(currUser)
             if (currUser.username === username) {
-                const currentUser = storeLoad[0]; 
+                const currentUser = storeManager.loadStore(currUser); 
                 console.log("current user exits", currUser)
                 currentUser.dashes.push(dash);
                 storeManager.updateStore(currentUser);
-            } else {
-                const currentUser = storeLoad[0];
-                currentUser.addDash(dash);
-                storeManager.updateStore(currentUser);
-            }
+            } 
+            // else {
+            //     const currentUser = storeManager.loadStore(currUser);
+            //     currentUser.addDash(dash);
+            //     storeManager.updateStore(currentUser);
+            // }
         })
         // todo;  what if the user is not found ?? ! 
         
@@ -132,14 +129,38 @@ class DashManager {
 
 }
 
+/**
+ * What does the beg entail?
+ *  Once a beg requested, the dashID of the item is gotten
+ *  the begged attribute of the item is meant to be updated with the beg object created once the submit button is clicked.
+ */
 class Beg {
-    constructor (message, user, id, dash_id) {
+    constructor (message, user, beg_id, dash_id) {
         this.message = message;
         this.user = user;
-        this.id = id;
+        this.beg_id = beg_id;
         this.dash_id = dash_id;
     }
+
+    submitBeg(beg) {
+        if (beg.dash_id) {
+            const giver = store.find(user => user.dashes.find(dash => dash.id == beg.dash_id));
+            const dash = giver.dashes.find(dash => dash.id == beg.dash_id);
+
+            dash.begged.push(beg);
+
+
+            return dash;
+        } else console.error("No dash id");
+    }
+
+    updateBeg(user, beg) {
+        // Get the user's beg attribute and append the beg object to it
+        user.begs.push(beg);
+    }
 }
+
+
 
 function createImage(imageName, node) {
     /*

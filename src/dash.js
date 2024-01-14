@@ -2,6 +2,7 @@ const dashForm = document.querySelector(".dash__form");
 const dashImageInput = document.querySelector(".dash__image--input");
 const dashImageContainer = document.querySelector(".dash__input-container");
 
+// ? Display selected file image as a card
 dashImageInput.onchange = () => {
     if (dashImageInput.files) {
         for (let i = 0; i < dashImageInput.files.length; i++) {
@@ -12,6 +13,7 @@ dashImageInput.onchange = () => {
     }
 }
 
+const storeLoad = storeManager.loadStore('anonymous');
 
 const btnDash =  document.querySelector(".btn__submit--dash");
 
@@ -20,15 +22,14 @@ btnDash.onclick = () => {
     dashCategory = document.querySelector(".dash__category").value;
     dashImage = document.querySelector(".dash__name")
     
-    if (dashName && dashCategory) {
+    if (true) {
         newDash = new Dash(dashImage, dashName, dashCategory, new Date().toLocaleDateString(), Date.now());
+
+        dashManager.updateUser('anonymous', newDash);
+        // console.log(store);
+        dashForm.submit();
     
         // ? Get the user's account and update the dash property
-        parsedStore = JSON.parse(currentUser.user);
-        parsedStore.dash.push(newDash);
-        currentUser.setItem("user", JSON.stringify(parsedStore));
-    
-        // ! Test
-        console.log(currentUser.user)
+
     }
 }
